@@ -29,7 +29,7 @@
 %% ================ Part 1: Feature Normalization ================
 
 %% Clear and Close Figures
-clear ; close all; clc
+clear all; close all; clc
 
 fprintf('Loading data ...\n');
 
@@ -53,7 +53,6 @@ fprintf('Normalizing Features ...\n');
 
 % Add intercept term to X
 X = [ones(m, 1) X];
-
 
 %% ================ Part 2: Gradient Descent ================
 
@@ -82,8 +81,8 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+alpha = 0.1;
+num_iters = 1000;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
@@ -104,8 +103,10 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
 
+normalizedFeatures = ([1650 3] .- mu) ./ sigma;
+price = [1 normalizedFeatures]';
+price = theta' * price;
 
 % ============================================================
 
@@ -114,7 +115,6 @@ fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
-
 %% ================ Part 3: Normal Equations ================
 
 fprintf('Solving with normal equations...\n');
@@ -149,11 +149,9 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
-
+price = theta' * [1; 1650; 3];
 
 % ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
          '(using normal equations):\n $%f\n'], price);
-

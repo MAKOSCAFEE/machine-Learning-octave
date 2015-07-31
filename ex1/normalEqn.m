@@ -11,7 +11,11 @@ theta = zeros(size(X, 2), 1);
 %
 
 % ---------------------- Sample Solution ----------------------
+% As defined in one of the classes related to the normal equation,
+% we will be using the function 'pinv', which returns the 
+% sudoinverse of a matrix.
 
+theta = pinv(X' * X) * X' * y;
 
 
 
